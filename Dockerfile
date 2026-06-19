@@ -1,15 +1,16 @@
 FROM debian:stable-slim
 
-# 1. System dependencies + curl, tar aur gzip install karein (CLI extract karne ke liye zaroori hain)
+# 1. System dependencies + curl, tar, gzip aur bash install karein
 RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
     tar \
     gzip \
+    bash \
     && rm -rf /var/lib/apt/lists/*
 
-# 2. Railway CLI ko globally install karein
-RUN curl -fsSL https://railway.app/install.sh | sh
+# 2. Railway CLI ko globally BASH ke sath install karein (sh se error aata hai)
+RUN curl -fsSL https://railway.app/install.sh | bash
 
 # 3. Working directory set karein
 WORKDIR /app
