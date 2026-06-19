@@ -1,5 +1,9 @@
 FROM debian:stable-slim
 
+# Python aur Terminal ko UTF-8 mode me force karein (Emojis support ke liye)
+ENV LANG=C.UTF-8
+ENV PYTHONIOENCODING=utf-8
+
 # 1. System dependencies + curl, tar, gzip aur bash install karein
 RUN apt-get update && apt-get install -y \
     curl \
@@ -18,7 +22,7 @@ WORKDIR /app
 # 4. Saari files ko container me copy karein
 COPY . .
 
-# 5. Seedha bot.bin ko executable banayein (Tukde jodne ki zaroorat nahi)
+# 5. Seedha bot.bin ko executable banayein
 RUN chmod +x bot.bin
 
 # 6. Bot binary ko run karein
